@@ -1,0 +1,32 @@
+använd samma metod som hamburgerbaren för simulering
+
+sätta ihop tåg:
+- trafikledning ber station att sätta ihop ett tåg
+- använd trafikledning
+
+jobba med pekare till basklass för att skriva ut information.
+alla stationer etc har en lista med tåg och klasser, de ska hålla pekare till basklassen av tågen och vagnarna.
+
+
+4 - 5 stationer bör räcka
+en station ska vara beroende av vagnar som inte kommit fram än.
+
+ett tåg är en sorts template eller mall
+
+två klasser, en för en tågmall, en för ett ihopkopplat, rullande tåg??
+
+eller bara en klass, med två lägen? spara info om ihopkopplat tåg i samma klass.
+
+flytta vagnar från en station till den nästa
+- flytta pekare från station, till tåg, till station
+
+tåg klass, get set remove vehicle
+
+Programming by intention. skriv programmet som om funktionerna redan fanns
+
+meny:
+1. titta på station
+2. titta på tåg (eller lista tåg?) en till meny där man väljer tåg.
+3. gå frammåt ett tidsteg
+
+ha en trafikledning klass, kontroller klass, som håller koll på alla tåg.

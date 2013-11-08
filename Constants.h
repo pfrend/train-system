@@ -1,0 +1,2 @@
+//Train states
+enum trainStateT {NOT_ASSEMBLED, NOT_READY, READY, RUNNING, ARRIVED, FINISHED};

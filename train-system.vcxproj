@@ -76,6 +76,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Carriage.h" />
+    <ClInclude Include="ClosedFreightCarriage.h" />
+    <ClInclude Include="CoachCarriage.h" />
+    <ClInclude Include="dieselLoc.h" />
+    <ClInclude Include="elecLoc.h" />
+    <ClInclude Include="FreightCarriage.h" />
+    <ClInclude Include="Locomotive.h" />
+    <ClInclude Include="OpenFreightCarriage.h" />
+    <ClInclude Include="PeopleCarriage.h" />
+    <ClInclude Include="SleepingCarriage.h" />
+    <ClInclude Include="Station.h" />
+    <ClInclude Include="Train.h" />
+    <ClInclude Include="Vehicle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Carriage.cpp" />
+    <ClCompile Include="ClosedFreightCarriage.cpp" />
+    <ClCompile Include="CoachCarriage.cpp" />
+    <ClCompile Include="dieselLoc.cpp" />
+    <ClCompile Include="elecLoc.cpp" />
+    <ClCompile Include="FreightCarriage.cpp" />
+    <ClCompile Include="Locomotive.cpp" />
+    <ClCompile Include="OpenFreightCarriage.cpp" />
+    <ClCompile Include="PeopleCarriage.cpp" />
+    <ClCompile Include="SleepingCarriage.cpp" />
+    <ClCompile Include="Station.cpp" />
+    <ClCompile Include="Train.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

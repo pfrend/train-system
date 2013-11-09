@@ -8,7 +8,7 @@ private:
 	int maxSpeedKm;
 	int powerKw;
 public:
-	elecLoc(void);
+	elecLoc(int id, int maxSpeedKm, int powerKw);
 	~elecLoc(void);
 	void display(ostream&);
 };

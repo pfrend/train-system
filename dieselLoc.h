@@ -1,6 +1,6 @@
 #pragma once
 #include "locomotive.h"
-class dieselLoc :
+class DieselLoc :
 	public Locomotive
 {
 
@@ -9,8 +9,8 @@ private:
 	double fuelConsumption;
 
 public:
-	dieselLoc(void);
-	~dieselLoc(void);
+	DieselLoc(int id, int maxSpeedKm, double fuelConsumption);
+	~DieselLoc(void);
 	void display(ostream&);
 };
 

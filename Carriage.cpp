@@ -1,7 +1,8 @@
 #include "Carriage.h"
 
 
-Carriage::Carriage(void)
+Carriage::Carriage(int id, string type)
+	:Vehicle(id, type)
 {
 }
 

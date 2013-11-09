@@ -1,11 +1,16 @@
 #include "dieselLoc.h"
 
 
-dieselLoc::dieselLoc(void)
+DieselLoc::DieselLoc(int id, int maxSpeedKm, double fuelConsumption)
+	:Locomotive(id,"dieselLoc"), //parent
+	maxSpeedKm(maxSpeedKm), fuelConsumption(fuelConsumption) //memb
 {
 }
 
 
-dieselLoc::~dieselLoc(void)
+DieselLoc::~DieselLoc(void)
 {
+}
+
+void DieselLoc::display(ostream&) {
 }

@@ -3,8 +3,13 @@
 class CoachCarriage :
 	public PeopleCarriage
 {
+
+private:
+	int seats;
+	bool internet;
+
 public:
-	CoachCarriage(void);
+	CoachCarriage(int id, int seats, bool internet);
 	~CoachCarriage(void);
 	virtual void display(ostream&);
 };

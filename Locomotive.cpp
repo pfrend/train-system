@@ -1,9 +1,9 @@
 #include "Locomotive.h"
 
 
-Locomotive::Locomotive(void)
-{
-}
+Locomotive::Locomotive(int id, string type)
+	:Vehicle(id, type)
+{}
 
 
 Locomotive::~Locomotive(void)

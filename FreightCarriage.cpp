@@ -1,7 +1,8 @@
 #include "FreightCarriage.h"
 
 
-FreightCarriage::FreightCarriage(void)
+FreightCarriage::FreightCarriage(int id, string type)
+	:Carriage(id, type)
 {
 }
 

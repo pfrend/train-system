@@ -79,6 +79,7 @@
     <ClInclude Include="Carriage.h" />
     <ClInclude Include="ClosedFreightCarriage.h" />
     <ClInclude Include="CoachCarriage.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="dieselLoc.h" />
     <ClInclude Include="elecLoc.h" />
     <ClInclude Include="FreightCarriage.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="SleepingCarriage.h" />
     <ClInclude Include="Station.h" />
     <ClInclude Include="Train.h" />
+    <ClInclude Include="TrainController.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
@@ -98,11 +100,13 @@
     <ClCompile Include="elecLoc.cpp" />
     <ClCompile Include="FreightCarriage.cpp" />
     <ClCompile Include="Locomotive.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="OpenFreightCarriage.cpp" />
     <ClCompile Include="PeopleCarriage.cpp" />
     <ClCompile Include="SleepingCarriage.cpp" />
     <ClCompile Include="Station.cpp" />
     <ClCompile Include="Train.cpp" />
+    <ClCompile Include="TrainController.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

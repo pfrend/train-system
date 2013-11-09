@@ -1,7 +1,8 @@
 #include "PeopleCarriage.h"
 
 
-PeopleCarriage::PeopleCarriage(void)
+PeopleCarriage::PeopleCarriage(int id, string type)
+	:Carriage(id, type)
 {
 }
 

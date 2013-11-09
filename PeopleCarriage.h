@@ -1,15 +1,13 @@
 #pragma once
-#include "carriage.h"
+#include "Carriage.h"
 class PeopleCarriage :
 	public Carriage
 {
 
-private:
-	int seats;
-	bool internet;
+
 
 public:
-	PeopleCarriage(void);
+	PeopleCarriage(int id, string type);
 	~PeopleCarriage(void);
 	void display(ostream&) = 0;
 };

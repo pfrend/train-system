@@ -1,10 +1,14 @@
 #pragma once
-#include "vehicle.h"
+#include "Vehicle.h"
+#include <string>
+
 class Carriage :
 	public Vehicle
 {
+
+
 public:
-	Carriage(void);
+	Carriage(int id, string type);
 	~Carriage(void);
 	virtual void display(ostream&) = 0;
 };

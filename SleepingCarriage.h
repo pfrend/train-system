@@ -1,5 +1,5 @@
 #pragma once
-#include "peoplecarriage.h"
+#include "PeopleCarriage.h"
 class SleepingCarriage :
 	public PeopleCarriage
 {
@@ -8,7 +8,7 @@ private:
 	int beds;
 
 public:
-	SleepingCarriage(void);
+	SleepingCarriage(int id, int beds);
 	~SleepingCarriage(void);
 	void display(ostream&);
 };

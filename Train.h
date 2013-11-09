@@ -3,22 +3,27 @@ using namespace std;
 #include <map>
 #include "Vehicle.h"
 #include "Constants.h"
+#include "Station.h"
 
 //forward declare station
 class Station;
+typedef pair<int,string> trainSlot; //define a pair to be stored in map
 
 class Train
 {
 
 private:
 	int id;
-	typedef map<int, Vehicle*>::iterator it;
-	map<int,Vehicle*> vehicles;
+	typedef map<trainSlot, Vehicle*> trainMap;
+	typedef trainMap::iterator it; //store pair in map so that we get access to type, order and vehicle in one 'row'
+	trainMap vehicles; //pointers to connected vehicles.
 	trainStateT state;
 	int depTime,schedDepTime; //dep time = when train actually left. schedDepTime = when it was meant to leave.
 	int arrTime, schedArrTime; //as above but for arrivals.
 	bool late;
-	Station* depStation, arrStation;
+	Station* depStation;
+	Station* arrStation;
+	
   
 	bool active; //needed? to find connected trains just loop through and filter by state? Or have a pointer collection in TrainController which points to active trains and one which points to all trains.
 	
@@ -26,10 +31,12 @@ private:
 
 
 public:
-	Train(map<int,Vehicle*> vehicles, trainStateT state);
+	Train(int id, map<trainSlot,Vehicle*> vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation);
 	~Train(void);
+	bool addVehicles(); //tries to add vehicles from depStation
+	bool unloadVehicles();
 	void display(); //print out train details
-	//TODO print out individual carriage details
+	//TODO print out individual carriage details and more display methods
 	//Vehicle* getLocomotive();
 };
 

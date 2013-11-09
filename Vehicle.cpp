@@ -1,7 +1,8 @@
 #include "Vehicle.h"
 
 
-Vehicle::Vehicle(void)
+Vehicle::Vehicle(int id, string type)
+	:id(id),type(type)
 {
 }
 

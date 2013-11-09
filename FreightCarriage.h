@@ -4,7 +4,7 @@ class FreightCarriage :
 	public Carriage
 {
 public:
-	FreightCarriage(void);
+	FreightCarriage(int id, string type);
 	~FreightCarriage(void);
 	virtual void display(void) = 0;
 };

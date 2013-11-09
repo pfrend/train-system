@@ -9,7 +9,7 @@ private:
 	int loadSurface;
 
 public:
-	OpenFreightCarriage(void);
+	OpenFreightCarriage(int id, double loadCapacity, int loadSurface);
 	~OpenFreightCarriage(void);
 	void display(ostream&);
 };

@@ -8,7 +8,7 @@ private:
 	int loadingVolume;
 
 public:
-	ClosedFreightCarriage(void);
+	ClosedFreightCarriage(int id, int loadingVolume);
 	~ClosedFreightCarriage(void);
 	void display(ostream&);
 };

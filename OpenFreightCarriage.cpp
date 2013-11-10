@@ -13,5 +13,8 @@ OpenFreightCarriage::~OpenFreightCarriage(void)
 {
 }
 
-void OpenFreightCarriage::display(ostream&) {
+void OpenFreightCarriage::display(ostream& os) {
+	Vehicle::display(os);
+	os << "loadCapacity: " << loadCapacity << endl
+		<< "loadSurface: " << loadSurface << endl;
 }

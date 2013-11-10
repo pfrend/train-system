@@ -12,5 +12,7 @@ ClosedFreightCarriage::~ClosedFreightCarriage(void)
 {
 }
 
-void ClosedFreightCarriage::display(ostream&) {
+void ClosedFreightCarriage::display(ostream& os) {
+	Vehicle::display(os);
+	os << "loading Volume: " << loadingVolume << endl;
 }

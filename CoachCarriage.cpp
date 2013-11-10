@@ -12,5 +12,11 @@ CoachCarriage::~CoachCarriage(void)
 {
 }
 
-void CoachCarriage::display(ostream&) {
+void CoachCarriage::display(ostream& os) {
+
+	Vehicle::display(os);
+	os << "seats: " << seats << endl
+		<< "Internet: " << internet << endl;
+
+
 }

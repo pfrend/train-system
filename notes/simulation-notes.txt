@@ -63,3 +63,10 @@ Stations get initialized with null trains.
 train shouldn't have pointer to station. it should just store the station id.
 that way when adding vehicles from station, the controller can ask for the trains
 vehicle list, loop through it and do what the train is currently doing.
+
+
+
+trains that never left: trains that are still NOT_ASSEMBLED
+loop through all trains, and count if state = NOT_ASSEMBLED
+
+

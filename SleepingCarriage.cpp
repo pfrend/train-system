@@ -12,5 +12,7 @@ SleepingCarriage::~SleepingCarriage(void)
 {
 }
 
-void SleepingCarriage::display(ostream&) {
+void SleepingCarriage::display(ostream& os) {
+	Vehicle::display(os);
+	os << "beds: " << beds << endl;
 }

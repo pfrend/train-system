@@ -2,7 +2,7 @@
 
 
 TrainController::TrainController( Simulation* theSim ) 
-	: theSim(theSim), delayedTrips(0), successTrips(0)
+	: theSim(theSim), delayedTrips(0), successTrips(0), totalLateMins(0)
 {}
 
 
@@ -228,7 +228,11 @@ void TrainController::arriveTrain( int trainId )
 
 void TrainController::printSummary()
 {
-	cout << "end of sim. TODO: Summary details" << endl << endl;
+	cout << "end of sim. Details:" << endl << endl
+		<< delayedTrips << " trains delayed" << endl
+		<< totalLateMins << " total late minutes" << endl
+		<< successTrips << " total successful trips on time" << endl
+		<< countNotAssembled() << " trains never left" << endl << endl;
 }
 
 void TrainController::stripTrain( int trainId )
@@ -250,6 +254,35 @@ void TrainController::stripTrain( int trainId )
 void TrainController::closeTracks()
 {
 	cout << "time " << theSim->getTime() << ": END. Train tracks are now closed. No trains are active.";
+}
+
+int TrainController::countNotAssembled()
+{
+	int count = 0;
+	for (pair<int,Train*> train : trains) {
+		if(train.second->getState() == NOT_ASSEMBLED) count++;
+	}
+	return count;
+}
+
+void TrainController::printTrain( int trainId )
+{
+	Train* t = getTrain(trainId);
+	if (t) {
+		t->display();
+	} else {
+		cout << "train not found!";
+	}
+}
+
+Train* TrainController::getTrain( int id )
+{
+	return trains.find(id)->second;
+}
+
+void TrainController::printStation( int trainId )
+{
+
 }
 
 

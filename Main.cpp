@@ -33,7 +33,8 @@ int main() {
 
 	char ch; //menu selection
 	bool rerun = true, simHasEvents = true;
-	int cTime;
+	//int cTime;
+	int select, trainId;
 
 	do
 	{
@@ -67,16 +68,24 @@ int main() {
 			cout << "Moving forward " << TIMESTEP << " minutes..." << endl << endl;
 			simHasEvents = theSim->advance(TIMESTEP);
 
-			cTime = theSim->getTime();
+		/*	cTime = theSim->getTime();
 			if(cTime >= SIM_TIME)
-				theSim->scheduleEvent(new EndEvent(theSim,tCtrl,cTime));
-
+				theSim->scheduleEvent(new EndEvent(theSim,tCtrl,cTime));*/
 			
 			waitForKey();
 			break;
 
 		case '2':
+			cout << endl << endl
+				<< "Which train would you like details on?";
+			cin >> trainId;
+			cin.get();
+
+			tCtrl->printTrain(trainId);
+
+			waitForKey();
 			break;
+
 		case '7':
 		case 'q':
 		case 'Q':
@@ -119,18 +128,18 @@ cout << it->first.second;
 
 void testCreateTrain(){
 
-	map<trainSlot, Vehicle*> testVehicles;
+	/*map<trainSlot, Vehicle*> testVehicles;
 	Vehicle *v;
 	Station *st1;
 	Station *st2;
 	int trainSize = 10;
 	for (int i = 0; i < trainSize; i++)
 	{
-		testVehicles.emplace(trainSlot(i,"SleepingCarriage"),v); 
+	testVehicles.emplace(trainSlot(i,"SleepingCarriage"),v); 
 	}
 
 	Train train(142, testVehicles, 300, 400, st1, st2);
-	cout << "create train tested";
+	cout << "create train tested";*/
 
 }
 

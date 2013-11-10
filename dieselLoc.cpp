@@ -12,5 +12,8 @@ DieselLoc::~DieselLoc(void)
 {
 }
 
-void DieselLoc::display(ostream&) {
+void DieselLoc::display(ostream& os) {
+	Vehicle::display(os);
+	os << "max speed (km): " << maxSpeedKm << endl
+		<< "Fuel consumption: " << fuelConsumption << endl;
 }

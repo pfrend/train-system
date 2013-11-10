@@ -40,6 +40,7 @@ public:
 	bool unloadVehicles();
 
 	int getSchedDepTime(){return schedDepTime;}
+	trainStateT getState(){return state;}
 	int getSchedArrTime(){return schedArrTime;}
 	int getDepTime(){return depTime;}
 	int getArrTime(){return arrTime;}
@@ -54,6 +55,7 @@ public:
 	void arrDelay(int time){arrTime+=time;}
 
 	void display(); //print out train details
+	string convertState( trainStateT state );
 	//TODO print out individual carriage details and more display methods
 	//Vehicle* getLocomotive();
 };

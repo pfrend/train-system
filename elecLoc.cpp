@@ -13,5 +13,8 @@ elecLoc::~elecLoc(void)
 {
 }
 
-void elecLoc::display(ostream&) {
+void elecLoc::display(ostream& os) {
+	Vehicle::display(os);
+	os << "max speed (km): " << maxSpeedKm << endl
+		<< "Power (kW): " << powerKw << endl;
 }

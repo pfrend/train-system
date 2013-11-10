@@ -10,3 +10,9 @@ Vehicle::Vehicle(int id, string type)
 Vehicle::~Vehicle(void)
 {
 }
+
+void Vehicle::display( ostream& os /*= cout*/ )
+{
+	os << "Vehicle id " << id << endl
+		<< "Vehicle type " << type << endl;
+}

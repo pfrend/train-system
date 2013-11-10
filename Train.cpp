@@ -69,3 +69,37 @@ bool Train::unloadVehicles() {
 	return success;
 }
 
+void Train::display() {
+	
+	cout << endl << endl
+		<< "Train id: " << id << endl
+		<< "state: " << convertState(state) << endl
+		<< "vehicles in train: " << endl << endl;
+
+	//print all vehicles
+	for (pair<const trainSlot,Vehicle*> &v : vehicles) {
+		if(v.second)
+			v.second->display();
+	}
+}
+
+std::string Train::convertState( trainStateT state )
+{
+	switch(state)
+	{
+	case 0:
+		return "NOT_ASSEMBLED";
+	case 1:
+		return "NOT_READY";
+
+	case 2:
+		return "READY";
+	case 3:
+		return "RUNNING";
+	case 4:
+		return "ARRIVED";
+	case 5:
+		return "FINISHED";
+	}
+}
+

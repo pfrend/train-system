@@ -24,23 +24,31 @@ private:
 	map<int, Train*> trains; //int is the id of the train
 	unordered_map<int, Station*> stations; //int is id of station
 	Simulation* theSim;
-	bool readInStations(string fileName);
-	bool readInTrains(string fileName);
 	int delayedTrips;
 	int successTrips;
 	int totalLateMins;
+	bool readInStations(string fileName);
+	bool readInTrains(string fileName);
+	Train* getTrain(int id);
 public:
 	TrainController( Simulation *theSim);
 	~TrainController( void );
 	bool readInData( string stationFile, string trainFile);
 	void scheduleEvents();
+	
+	//event functions
 	bool tryBuild(int trainId);
 	void readyTrain( int trainId );
-	void printSummary();
 	int dispatchTrain( int trainId ); //returns arrival time
 	void arriveTrain( int trainId );
 	void stripTrain( int trainId );
 	void closeTracks();
+	
+	void printSummary();
+	void printTrain(int trainId);
+	void printStation(int trainId);
+
+	int countNotAssembled();
 };
 void waitForKey();
 

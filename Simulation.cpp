@@ -6,6 +6,7 @@
 */
 
 #include "Simulation.h"
+#include "Constants.h"
 #include "Event.h"
 
 // Execute events until event queue is empty
@@ -29,6 +30,9 @@ bool Simulation::advance(int time)
 		nextEvent = NULL;
 
     }
+
+	return true;
+
 }
 
 

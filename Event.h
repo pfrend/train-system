@@ -95,12 +95,12 @@ protected:
 class FinishEvent : public Event {
 public:
     FinishEvent (Simulation *sim, TrainController *tCtrl, int time, int trainId)
-    :Event(time),theSim(sim),tCtrl(tCtrl),groupSize(trainId) { }
+    :Event(time),theSim(sim),tCtrl(tCtrl),trainId(trainId) { }
 
     virtual void processEvent();
 
 protected:
-    int groupSize;
+    int trainId;
     Simulation *theSim;
     TrainController *tCtrl;
 };

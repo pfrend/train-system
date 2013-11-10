@@ -12,53 +12,49 @@
 
 void BuildEvent::processEvent()
 {
-	if (tCtrl->tryBuild(trainId))
+	if (tCtrl->tryBuild(trainId)) //tries to move all pointers from station to train
 	{
-		
 		time += SCHEDULE_READY;
 		theSim->scheduleEvent(new readyEvent(theSim, tCtrl, time, trainId));
+	} else {
+		time += TRAIN_DELAY;
+		theSim->scheduleEvent(new BuildEvent(theSim,tCtrl,time,trainId));
 	}
 
 }
 
 void readyEvent::processEvent()
 {
-	
-	//theBar->order(trainId);
-	//time += randBetween(MIN_SERVICE_WAIT, MAX_SERVICE_WAIT);
-	//theSim->scheduleEvent(new LeaveEvent(theSim, theBar, time, trainId));
+	tCtrl->readyTrain(trainId);
+	time += SCHEDULE_LEAVE;
+	theSim->scheduleEvent(new LeaveEvent(theSim,tCtrl,time,trainId));
 	
 }
 
 void LeaveEvent::processEvent()
 {
-	//tCtrl->serve(trainId);
-	//time += SEAT_SEARCH_TIME;
-	//theSim->scheduleEvent(new ArriveEvent(theSim, tCtrl, time, trainId/BURGERS_PER_PERSON));
+	int arrTime = tCtrl->dispatchTrain(trainId);
+	time = arrTime;
+	theSim->scheduleEvent( new ArriveEvent(theSim, tCtrl, time, trainId));
 }
 
 void ArriveEvent::processEvent()
 {
-//	if (tCtrl->getChairs(trainId))
-//	{
-//		
-//		time += randBetween(MIN_EATING_TIME,MAX_EATING_TIME);
-//		theSim->scheduleEvent(new FinishEvent(theSim, tCtrl, time, trainId));
-//	}
-//	else 
-//	{
-//		time += SEAT_SEARCH_TIME;
-//		theSim->scheduleEvent(new ArriveEvent(theSim, tCtrl, time, trainId));
-//	}
+
+	tCtrl->arriveTrain(trainId);
+	time += SCHEDULE_STRIP_TRAIN;
+	theSim->scheduleEvent( new FinishEvent(theSim, tCtrl, time, trainId));
+
 }
 
 void FinishEvent::processEvent()
 {
-	//tCtrl->leave(groupSize);
+	tCtrl->stripTrain(trainId);
+
 }
 
 void EndEvent::processEvent()
 {
-	//tCtrl->closeDown();
+	tCtrl->closeTracks();
 
 }

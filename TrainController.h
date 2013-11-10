@@ -27,12 +27,18 @@ private:
 	bool readInStations(string fileName);
 	bool readInTrains(string fileName);
 	int delayedTrips;
+	int successTrips;
+	int totalLateMins;
 public:
-	TrainController(Simulation *theSim);
-	~TrainController(void);
-	bool readInData(string stationFile, string trainFile);
+	TrainController( Simulation *theSim);
+	~TrainController( void );
+	bool readInData( string stationFile, string trainFile);
 	void scheduleEvents();
 	bool tryBuild(int trainId);
+	void readyTrain( int trainId );
+	void printSummary();
+	int dispatchTrain( int trainId ); //returns arrival time
+	void arriveTrain( int trainId );
 };
 void waitForKey();
 

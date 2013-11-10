@@ -32,7 +32,7 @@ int main() {
 
 
 	char ch; //menu selection
-	bool rerun = true;
+	bool rerun = true, simHasEvents = true;
 
 	do
 	{
@@ -54,11 +54,19 @@ int main() {
 		switch(ch)
 		{ 
 		case '1':
-			cout << endl << endl
-				<< "Moving forward " << TIMESTEP << " minutes..." << endl << endl;
+			cout << endl << endl;
+			
+			if( ! simHasEvents) {
+				cout << "End of simulation. Details: " << endl << endl;
+				tCtrl->printSummary();
+				rerun = false;
+				break;
+			}
+			
+			cout << "Moving forward " << TIMESTEP << " minutes..." << endl << endl;
+			simHasEvents = theSim->advance(TIMESTEP);
 
-			theSim->advance(TIMESTEP);
-
+			
 			waitForKey();
 			break;
 
@@ -74,15 +82,6 @@ int main() {
 			waitForKey();
 		}
 	}while(rerun);	
-
-
-
-
-	//menu
-
-
-
-
 
 system("pause");
 return 0;

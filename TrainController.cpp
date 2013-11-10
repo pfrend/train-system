@@ -1,7 +1,8 @@
 #include "TrainController.h"
 
 
-TrainController::TrainController( Simulation* theSim ) : theSim(theSim), delayedTrips(0)
+TrainController::TrainController( Simulation* theSim ) 
+	: theSim(theSim), delayedTrips(0), successTrips(0)
 {}
 
 
@@ -123,7 +124,7 @@ void TrainController::scheduleEvents()
 {
 	//schedule build events for every train in system
 	for (pair<int,Train*> train : trains) {
-		int depTime = train.second->getSchedDepTime() - 30; //build should happen 30 minutes before departure
+		int depTime = train.second->getSchedDepTime() - SCHEDULE_BUILD; //build should happen 30 minutes before departure
 		theSim->scheduleEvent(new BuildEvent(theSim,this,depTime,train.first));
 	}
 }
@@ -136,17 +137,119 @@ bool TrainController::tryBuild(int trainId)
 	if (tmpTrain && tmpTrain->addVehicles())
 	{
 		cout << "time " << theSim->getTime() << ": Train " << trainId << " finished building at station " << tmpTrain->getDepStation(); 
+
+		//set state
+		tmpTrain->setState(NOT_READY);
+		
 		return true;
 	}
 	cout << "time " << theSim->getTime() << ": Train " << trainId << "could not build at station " << tmpTrain->getDepStation(); 
 
-	//if this train hasn't been delayed yet, add it to the delayed trips counter
-	if (!tmpTrain->getLate()) delayedTrips++;
-	
-	//set train to late so that above counter doesn't increment next time
-	tmpTrain->setLate(true);
 
+	//set train to late
+	if ( ! tmpTrain->getLate()){
+		tmpTrain->setLate(true);
+	}
+	
 	return false;
+}
+
+
+void TrainController::readyTrain(int trainId)
+{
+	//find train
+	Train* tmpTrain = trains.find(trainId)->second;
+
+	//set state
+	tmpTrain->setState(READY);
+	
+	cout << "time " << theSim->getTime() << ": Train " << trainId << " has been assembled at station " << tmpTrain->getDepStation(); 
+}
+
+int TrainController::dispatchTrain( int trainId )
+{
+	int lateness;
+	//find train
+	Train* tmpTrain = trains.find(trainId)->second;
+
+	//set state
+	tmpTrain->setState(RUNNING);
+
+	//current time
+	int cTime = theSim->getTime();
+
+
+	//if train is leaving late
+	if(tmpTrain->getLate()) {
+	
+		//set current departure time
+		tmpTrain->setDepTime(cTime);
+		
+		//how late is it
+		lateness = cTime - tmpTrain->getSchedDepTime();
+
+		//delay arrival time
+		tmpTrain->arrDelay(lateness);
+	}
+
+	int arrTime = tmpTrain->getArrTime();
+
+	cout << "time " << theSim->getTime() << ": Train " << trainId << " just left station " << tmpTrain->getDepStation();
+	if (tmpTrain->getLate())
+		cout << endl << "It left " << lateness << " minutes late";
+	else
+		cout << endl << "It left on time ";
+
+	cout << " and will arrive at time " << arrTime;
+
+	return arrTime;
+}
+
+void TrainController::arriveTrain( int trainId )
+{
+	//find train
+	Train* tmpTrain = trains.find(trainId)->second;
+	tmpTrain->setState(ARRIVED);
+
+	cout << "time " << theSim->getTime() << ": Train " << trainId << " just arrived at station " << tmpTrain->getArrStation();
+
+	//if train arrived late
+	if (tmpTrain->getLate()) {
+		int lateMins = tmpTrain->getArrTime() - tmpTrain->getSchedArrTime();
+		delayedTrips++;
+		totalLateMins += lateMins;
+		cout << endl << "It arrived " << lateMins << " minutes late";
+	}
+	else {
+		cout << endl << "It arrived on time ";
+		successTrips++;
+	}
+}
+
+void TrainController::printSummary()
+{
+	cout << "end of sim. TODO: Summary details" << endl << endl;
+}
+
+void TrainController::stripTrain( int trainId )
+{
+	//find train
+	Train* tmpTrain = trains.find(trainId)->second;
+
+	int	loadSize = tmpTrain->getVehicleCount();
+
+	//move vehicles to station
+	tmpTrain->unloadVehicles();
+
+	tmpTrain->setState(FINISHED);
+
+	cout << "time " << theSim->getTime() << ": Train " << trainId << " finished at station " << tmpTrain->getArrStation();
+	cout << endl << "It unloaded " << loadSize << " vehicles."
+}
+
+void TrainController::closeTracks()
+{
+	cout << "time " << theSim->getTime() << ": END. Train tracks are now closed. No more trains may leave.";
 }
 
 

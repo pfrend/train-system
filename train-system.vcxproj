@@ -82,10 +82,12 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="dieselLoc.h" />
     <ClInclude Include="elecLoc.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="FreightCarriage.h" />
     <ClInclude Include="Locomotive.h" />
     <ClInclude Include="OpenFreightCarriage.h" />
     <ClInclude Include="PeopleCarriage.h" />
+    <ClInclude Include="Simulation.h" />
     <ClInclude Include="SleepingCarriage.h" />
     <ClInclude Include="Station.h" />
     <ClInclude Include="Train.h" />
@@ -98,11 +100,13 @@
     <ClCompile Include="CoachCarriage.cpp" />
     <ClCompile Include="dieselLoc.cpp" />
     <ClCompile Include="elecLoc.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="FreightCarriage.cpp" />
     <ClCompile Include="Locomotive.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OpenFreightCarriage.cpp" />
     <ClCompile Include="PeopleCarriage.cpp" />
+    <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="SleepingCarriage.cpp" />
     <ClCompile Include="Station.cpp" />
     <ClCompile Include="Train.cpp" />

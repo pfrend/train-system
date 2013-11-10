@@ -6,6 +6,8 @@ Train::Train(int id, map<trainSlot,Vehicle*> vehicles, int schedDepTime, int sch
 	vehicles(vehicles), //null pointers but to derived classes of vehicles.
 	schedDepTime(schedDepTime),
 	schedArrTime(schedArrTime),
+	depTime(schedDepTime),
+	arrTime(schedArrTime),
 	depStation(depStation),
 	arrStation(arrStation), 
 	late(false), 
@@ -18,9 +20,10 @@ Train::~Train(void)
 }
 
 
-//add vehicles. pre:state is READY
+//add vehicles. 
+//pre: state == READY
 //return true if all vehicles added
-//return false if any vehicles weren't added
+//return false if not all vehicles were added
 bool Train::addVehicles() {
 	bool success = true;
 	for (pair<const trainSlot,Vehicle*> &v : vehicles)

@@ -4,22 +4,51 @@
 #include "SleepingCarriage.h"
 #include "CoachCarriage.h"
 #include "Station.h"
+#include "Simulation.h"
+#include "TrainController.h"
 
-
+//test function definitions
 void testVehicleArray();
 void testCreateTrain();
 void testAddVehicleToStation();
 void testMoveVehicleToTrainFromStation();
+
+
 int main() {
 //testVehicleArray();
 //testCreateTrain();
 //testAddVehicleToStation();
-testMoveVehicleToTrainFromStation();
+//testMoveVehicleToTrainFromStation();
+
+	Simulation *theSim = new Simulation;
+	TrainController *tCtrl = new TrainController(); //pass in sim.
+
+	tCtrl->readInData("trains.dat");
+	//tCtrl->scheduleEvents();
+
+	//1. read in stage, e.g how many stations, how many vehicles, how many trains
+	//one file for stations and its vehicles, one for trains
+	//2. create events from trains that have been read in
+	//trains are located with pointres in trainController, sorted by dep time.
+	//for each train, schedule an event, with its departure time, id, and station id.
+
+
+
+
+	//menu
+
+
+
+
 
 system("pause");
 return 0;
 }
 
+
+//*******************************
+//TEST FUNCTIONS
+//*******************************
 void testVehicleArray(){
 
 map<trainSlot, Vehicle*> testVehicles;

@@ -7,7 +7,10 @@ using namespace std;
 
 //forward declare station
 class Station;
-typedef pair<int,string> trainSlot; //define a pair to be stored in map
+
+//trainSlot stored as key in trainMap, which stores all vehicles.
+//int: vehicle order in train. string: vehicle type.
+typedef pair<int,string> trainSlot; 
 
 class Train
 {
@@ -16,7 +19,7 @@ private:
 	int id;
 	typedef map<trainSlot, Vehicle*> trainMap;
 	typedef trainMap::iterator it; //store pair in map so that we get access to type, order and vehicle in one 'row'
-	trainMap vehicles; //pointers to connected vehicles.
+	trainMap vehicles; //pointers to vehicles.
 	trainStateT state;
 	int depTime,schedDepTime; //dep time = when train actually left. schedDepTime = when it was meant to leave.
 	int arrTime, schedArrTime; //as above but for arrivals.

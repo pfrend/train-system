@@ -25,7 +25,7 @@ public:
 	~Station(void);
 	void addVehicle(Vehicle* vehicle) {vehicles.emplace(vehicle);}
 	Vehicle* findVehicle(string type);
-	bool removeVehicle(Vehicle* v);
+	bool removeVehicle(Vehicle* vehicle);
 };
 
 

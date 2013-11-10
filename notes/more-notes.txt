@@ -1,0 +1,25 @@
+sim reads in starting conditions from text file
+from these conditions lots of stations are created with carriages
+
+A schedule is also read in with trains and when they have to leave and arrive
+and where from and to
+so it reads in trains and schedules leave events
+each train has an arrive time property
+when a leave event happens, an arrive event is scheduled x amount of time in the future
+
+when an arrive event occurs, it checks if the time is the same as it's scheduled
+arrival time, if not, a lateEvent is scheduled.
+
+
+train starts with empty pointers.
+when train moves to construction phase it tries to move pointers to its collection of vehicles. if it can fill them all then it departs.
+
+controller has info of a train which needs to leave
+it tries to build the train from the parts at the station
+for each vehicle in train, ask station for vehicle of that type.
+if fail, issue delay event.
+
+have a schedule object which traincontroller points to.
+
+controller stores logical trains. when a train has to leave, it builds the real train
+at the station

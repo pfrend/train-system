@@ -30,3 +30,24 @@ meny:
 3. gå frammåt ett tidsteg
 
 ha en trafikledning klass, kontroller klass, som håller koll på alla tåg.
+
+
+
+build a train by assigning null pointers for different types of vehicles.
+then you have a logical train.
+train has a connectTrain function, which tries to assign vehicles from station to all its pointers. It fills all the pointers it can, and if it cant fill them all, it tries again later with the remaining ones.
+
+initially, stations have physical vehicles (with id), trains have logical vehicles (no id)
+
+
+
+
+use a multimap instead and have the index be the string of the type of vehicle.
+
+
+if map type can be found in station then assign pointer from station to map object
+then delete pointer from station.
+then search next map type
+
+
+

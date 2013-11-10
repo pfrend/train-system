@@ -1,0 +1,17 @@
+<station file>
+Name
+ID
+vehicleAmount
+<loop of vehicles>
+
+
+
+
+
+
+
+<train file>
+ID
+times
+station ids for depStation and arrStation
+<loop of req vehicle types>

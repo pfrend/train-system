@@ -1,0 +1,65 @@
+SIMULATION
+
+simulate 4 hours, between 12 and 4. (start with just 50 minutes)
+
+240 minutes
+
+startTime = 0
+
+read in leaveEvents at various times.
+LeaveEvent(trainController, sim, time, trainNumber)
+
+then ask user to advance time
+sim->advanceTime(INCREMENT), this increases current time
+
+sim should then run all events with a time smaller than currentTime
+
+
+
+buildEvent
+readyEvent
+leaveEvent
+arriveEvent
+finishedEvent
+
+
+read in trains and their departure times.
+for each train, schedule a buildEvent 30 minutes before its dep time.
+
+buildEvent calls trainController->buildTrain. if train builds, sets state to not ready and prints this out, otherwise returns false and prints out "couldn't build"
+
+if returns true, schedule readyEvent 20 minutes in future
+if false schedule buildEvent 10 minutes in future and call trainController->delayTrain(). delay train changes depTime and arrTime
+
+readyEvent:
+call trainController-readyTrain(id), this sets train state to ready and prints this out.
+Schedules leave event 10 minutes in future.
+
+leaveEvent:
+calls trainController->dispatchTrain(id). Sets train state to running and prints this out.
+Schedules ArriveEvent based on a trains arrTime - depTime 
+
+ArriveEvent:
+calls trainController->receiveTrain(id). Sets train state to arrived and prints this out. prints train x arrived at x at time x, x minutes late.
+Schedules finishedEvent 30 minutes in future.
+add to tripsOnTime if not late, otherwise add to tripsDelayed and totalMinutesDelayed (schedArrTime - arrTime). 
+
+FinishedEvent:
+Calls trainController->dismantleTrain(id). Sets train state to FINISHED. Moves all pointers for vehicles from train to station pool. prints 'train x finished, and left x vehicles at station x'.
+
+run sim until time x, where no more trains are allowed to leave.
+
+
+
+
+INFO AT ANY TIME:
+get station info: number of trains, number of vehicles in pool
+get train info: vehicle info, schedule info, all info
+
+
+Other details:
+Stations get initialized with null trains.
+
+train shouldn't have pointer to station. it should just store the station id.
+that way when adding vehicles from station, the controller can ask for the trains
+vehicle list, loop through it and do what the train is currently doing.

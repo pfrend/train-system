@@ -12,12 +12,12 @@
 
 void BuildEvent::processEvent()
 {
-	//if (tCtrl->tryEnter(groupSize))
-	//{
-	//	//generate random num
-	//	time += randBetween(MIN_ORDER_WAIT,MAX_ORDER_WAIT);
-	//	theSim->scheduleEvent(new readyEvent(theSim, tCtrl, time, groupSize*BURGERS_PER_PERSON));
-	//}
+	if (tCtrl->tryBuild(trainId))
+	{
+		
+		time += SCHEDULE_READY;
+		theSim->scheduleEvent(new readyEvent(theSim, tCtrl, time, trainId));
+	}
 
 }
 

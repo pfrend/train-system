@@ -1,9 +1,4 @@
-sim reads in starting conditions from text file
-from these conditions lots of stations are created with carriages
 
-A schedule is also read in with trains and when they have to leave and arrive
-and where from and to
-so it reads in trains and schedules leave events
 each train has an arrive time property
 when a leave event happens, an arrive event is scheduled x amount of time in the future
 

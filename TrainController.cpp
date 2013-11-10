@@ -1,7 +1,7 @@
 #include "TrainController.h"
 
 
-TrainController::TrainController( Simulation* theSim ) : theSim(theSim)
+TrainController::TrainController( Simulation* theSim ) : theSim(theSim), delayedTrips(0)
 {}
 
 
@@ -117,4 +117,48 @@ bool TrainController::readInData( string stationFile, string trainFile )
 		return readInTrains(trainFile);
 	}
 	return false;
+}
+
+void TrainController::scheduleEvents()
+{
+	//schedule build events for every train in system
+	for (pair<int,Train*> train : trains) {
+		int depTime = train.second->getSchedDepTime() - 30; //build should happen 30 minutes before departure
+		theSim->scheduleEvent(new BuildEvent(theSim,this,depTime,train.first));
+	}
+}
+
+bool TrainController::tryBuild(int trainId)
+{
+	//find train
+	Train* tmpTrain = trains.find(trainId)->second;
+	
+	if (tmpTrain && tmpTrain->addVehicles())
+	{
+		cout << "time " << theSim->getTime() << ": Train " << trainId << " finished building at station " << tmpTrain->getDepStation(); 
+		return true;
+	}
+	cout << "time " << theSim->getTime() << ": Train " << trainId << "could not build at station " << tmpTrain->getDepStation(); 
+
+	//if this train hasn't been delayed yet, add it to the delayed trips counter
+	if (!tmpTrain->getLate()) delayedTrips++;
+	
+	//set train to late so that above counter doesn't increment next time
+	tmpTrain->setLate(true);
+
+	return false;
+}
+
+
+//HELPERS
+//------------------------------------------------------------------------------
+// Name : waitForKey
+// Purpose : stalls program and waits for key press
+// In data : -
+// Out data : -
+//------------------------------------------------------------------------------
+void waitForKey()
+{
+	cout << endl << endl << "Press a key to continue!";
+	cin.get();
 }

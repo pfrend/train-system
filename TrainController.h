@@ -12,9 +12,10 @@
 #include "OpenFreightCarriage.h"
 #include "elecLoc.h"
 #include "dieselLoc.h"
+#include "Simulation.h"
 
 //forward declare
-class Simulation;
+//class Simulation;
 
 class TrainController
 {
@@ -25,10 +26,13 @@ private:
 	Simulation* theSim;
 	bool readInStations(string fileName);
 	bool readInTrains(string fileName);
+	int delayedTrips;
 public:
 	TrainController(Simulation *theSim);
 	~TrainController(void);
 	bool readInData(string stationFile, string trainFile);
-
+	void scheduleEvents();
+	bool tryBuild(int trainId);
 };
+void waitForKey();
 

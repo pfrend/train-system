@@ -23,7 +23,7 @@ public:
 
     int getTime() const { return currentTime; }
 
-    void advance();
+    void advance(int time);
 
 private:
     int currentTime; // Time for last processed event

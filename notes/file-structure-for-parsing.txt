@@ -14,4 +14,16 @@ vehicleAmount
 ID
 times
 station ids for depStation and arrStation
+vehicle amount
 <loop of req vehicle types>
+
+
+
+Vehicle types
+
+CoachCarriage: 		int seats, bool internet
+SleepingCarriage: 	int beds	
+OpenFreightCarriage: 	double loadcapacity, int loadsurface
+ClosedFreightCarriage: 	int loadingvolume
+dieselLoc: 		int maxspeed, double fuelconsumption
+elecLoc: 		int maxspeed, int power

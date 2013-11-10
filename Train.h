@@ -38,6 +38,10 @@ public:
 	~Train(void);
 	bool addVehicles(); //tries to add vehicles from depStation
 	bool unloadVehicles();
+	int getSchedDepTime(){return depTime;}
+	int getDepStation(){return depStation->getId();}
+	bool getLate(){return late;}
+	void setLate(bool nLate){late = nLate;}
 	void display(); //print out train details
 	//TODO print out individual carriage details and more display methods
 	//Vehicle* getLocomotive();

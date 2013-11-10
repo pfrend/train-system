@@ -1,9 +1,3 @@
-#include "Train.h"
-#include "Vehicle.h"
-#include "dieselLoc.h"
-#include "SleepingCarriage.h"
-#include "CoachCarriage.h"
-#include "Station.h"
 #include "Simulation.h"
 #include "TrainController.h"
 
@@ -25,14 +19,61 @@ int main() {
 
 	//1. read in stage, e.g how many stations, how many vehicles, how many trains
 	//one file for stations and its vehicles, one for trains
+
 	tCtrl->readInData("data/stations.dat","data/trains.dat");
 	
-	int test = 4;
 	//2. create events from trains that have been read in
 	//trains are located with pointers in trainController, sorted by dep time.
 	//for each train, schedule an event, with its departure time, id, and station id.
+
 	tCtrl->scheduleEvents();
 
+	//print menu which lets user advance time
+
+
+	char ch; //menu selection
+	bool rerun = true;
+
+	do
+	{
+		cout << string(100, '\n');
+
+		cout << endl
+			<< " *-*-*-*-* MENU *-*-*-*-*" << endl
+			<< " 1. Advance time" << endl
+			<< " 2. Get train info" << endl
+			<< " 3. Get station info" << endl
+			<< " 4. Quit" << endl << endl
+			<< "Please make your selection:";
+
+		cin >>ch; // user makes their choice
+		cin.get();
+
+
+		// run based on user input	
+		switch(ch)
+		{ 
+		case '1':
+			cout << endl << endl
+				<< "Moving forward " << TIMESTEP << " minutes..." << endl << endl;
+
+			theSim->advance(TIMESTEP);
+
+			waitForKey();
+			break;
+
+		case '2':
+			break;
+		case '7':
+		case 'q':
+		case 'Q':
+		case char(27):
+			rerun = false;
+			break; // end program with option 3, q or Q, or escape button
+		default: cout << "not an option on the list!";
+			waitForKey();
+		}
+	}while(rerun);	
 
 
 
@@ -134,3 +175,5 @@ void testMoveVehicleToTrainFromStation() {
 	//train.unloadVehicles();
 
 }
+
+

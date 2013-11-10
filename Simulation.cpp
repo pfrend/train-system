@@ -5,14 +5,15 @@
   Edited:       2013 / Paul Frend
 */
 
-
 #include "Simulation.h"
 #include "Event.h"
 
 // Execute events until event queue is empty
-void Simulation::advance()
+void Simulation::advance(int time)
 
 {
+	currentTime += time;
+
 	//only process events that are meant to happen before currentTime
     while(eventQueue.top()->getTime() <= currentTime) {
         Event * nextEvent = eventQueue.top();

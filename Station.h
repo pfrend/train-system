@@ -28,6 +28,7 @@ public:
 	void addVehicle(Vehicle* vehicle) {vehicles.emplace(vehicle);}
 	Vehicle* findVehicle(string type);
 	bool removeVehicle(Vehicle* vehicle); //deletes pointer from vehicles, not the vehicle object from memory
+	int getId(){return id;}
 };
 
 

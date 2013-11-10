@@ -21,16 +21,18 @@ int main() {
 //testMoveVehicleToTrainFromStation();
 
 	Simulation *theSim = new Simulation;
-	TrainController *tCtrl = new TrainController(); //pass in sim.
-
-	tCtrl->readInData("trains.dat");
-	//tCtrl->scheduleEvents();
+	TrainController *tCtrl = new TrainController(theSim); //pass in sim.
 
 	//1. read in stage, e.g how many stations, how many vehicles, how many trains
 	//one file for stations and its vehicles, one for trains
+	tCtrl->readInData("data/stations.dat","data/trains.dat");
+	
+	int test = 4;
 	//2. create events from trains that have been read in
-	//trains are located with pointres in trainController, sorted by dep time.
+	//trains are located with pointers in trainController, sorted by dep time.
 	//for each train, schedule an event, with its departure time, id, and station id.
+	tCtrl->scheduleEvents();
+
 
 
 
@@ -88,47 +90,47 @@ void testCreateTrain(){
 }
 
 void testAddVehicleToStation(){
-	Station st1;
-	Vehicle *v = new CoachCarriage(10,30,true);
-	st1.addVehicle(v);
+	//Station st1();
+	//Vehicle *v = new CoachCarriage(10,30,true);
+	//st1.addVehicle(v);
 
-	//find vehicle at station
-	v = st1.findVehicle("CoachCarriage");
+	////find vehicle at station
+	//v = st1.findVehicle("CoachCarriage");
 	
 }
 
 void testMoveVehicleToTrainFromStation() {
 
-	map<trainSlot, Vehicle*> testVehicles;
-	Vehicle *v, *v2;
-	Station st1,st2;
-	Station* st1p = &st1;
-	Station* st2p = &st2;
-	int trainSize = 10;
-	
-	//build vehicles for train
-	for (int i = 0; i < trainSize; i++)
-	{
-		testVehicles.emplace(trainSlot(i,"SleepingCarriage"),nullptr); 
-	}
+	//map<trainSlot, Vehicle*> testVehicles;
+	//Vehicle *v, *v2;
+	//Station st1(),st2();
+	//Station* st1p = &st1;
+	//Station* st2p = &st2;
+	//int trainSize = 10;
+	//
+	////build vehicles for train
+	//for (int i = 0; i < trainSize; i++)
+	//{
+	//	testVehicles.emplace(trainSlot(i,"SleepingCarriage"),nullptr); 
+	//}
 
-	//add vehicle of diff type
-	testVehicles.emplace(trainSlot(10, "CoachCarriage"),v);
+	////add vehicle of diff type
+	//testVehicles.emplace(trainSlot(10, "CoachCarriage"),v);
 
-	//create train
-	Train train(142, testVehicles, 300, 400, st1p, st2p);
+	////create train
+	//Train train(142, testVehicles, 300, 400, st1p, st2p);
 
-	//add a vehicle to station
-	v2 = new CoachCarriage(10,30,true);
-	st1.addVehicle(v2);
+	////add a vehicle to station
+	//v2 = new CoachCarriage(10,30,true);
+	//st1.addVehicle(v2);
 
-	//find vehicle at station
-	v2 = st1.findVehicle("CoachCarriage");
+	////find vehicle at station
+	//v2 = st1.findVehicle("CoachCarriage");
 
-	//try to build train
-	train.addVehicles();
+	////try to build train
+	//train.addVehicles();
 
-	//unload train
-	train.unloadVehicles();
+	////unload train
+	//train.unloadVehicles();
 
 }

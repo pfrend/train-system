@@ -6,6 +6,6 @@ class FreightCarriage :
 public:
 	FreightCarriage(int id, string type);
 	~FreightCarriage(void);
-	virtual void display(void) = 0;
+	virtual void display(ostream&) = 0;
 };
 

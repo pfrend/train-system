@@ -1,13 +1,13 @@
 #include "Station.h"
 
-
-Station::Station(void)
-{
-}
+Station::Station( int id, string name, vehicleSet vehicles )
+	:id(id),name(name),vehicles(vehicles)
+{}
 
 
 Station::~Station(void)
 {
+	//TODO destroy all vehicles in vehicleSet
 }
 
 

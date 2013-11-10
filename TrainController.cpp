@@ -1,9 +1,8 @@
 #include "TrainController.h"
 
 
-TrainController::TrainController(void)
-{
-}
+TrainController::TrainController( Simulation* theSim ) : theSim(theSim)
+{}
 
 
 TrainController::~TrainController(void)
@@ -12,11 +11,67 @@ TrainController::~TrainController(void)
 
 bool TrainController::readInStations( string fileName )
 {
+	string name;
+	int id, vAmt;
+
+	//vars for reading vehicles
+	int vId,seats, beds, loadSur, loadVol, maxSp, power; 
+	double loadCap, fuelCon;
+	bool internet;
+	string vType;
+	Vehicle* v;
+
+	//create file
+	fstream inFile(fileName,ios::in);
+	if(!inFile) return false;
+
+	//remove any existing stations
+	//deleteTrains(); TODO
+	
+	vehicleSet vehicles; //unordered multiset
+
+	while (inFile) {
+
+		inFile >> id >> name >> vAmt; //get station id, name and amount of vehicles.
+		inFile.get();
+
+		for (int i = 0; i < vAmt; i++)
+		{
+			getline(inFile, vType);
+			inFile >> vId;			
+
+			if (vType == "CoachCarriage")
+			{
+				inFile >> seats >> internet;
+				v = new CoachCarriage(vId,seats,internet);
+			} else if (vType == "SleepingCarriage") {
+				inFile >> beds;
+				v = new SleepingCarriage(vId, beds);
+			} else if (vType == "ClosedFreightCarriage") {
+				inFile >> loadVol;
+				v = new ClosedFreightCarriage(vId,loadVol);
+			} else if (vType == "OpenFreightCarriage") {
+				inFile >> loadCap >> loadSur;
+				v = new OpenFreightCarriage(vId, loadCap, loadSur);
+			} else if (vType == "elecLoc") {
+				inFile >> maxSp >> power;
+				v = new elecLoc(vId,maxSp,power);
+			} else if (vType == "dieselLoc") {
+				inFile >> maxSp >> fuelCon;
+				v = new DieselLoc(vId,maxSp, fuelCon);
+			}
+			inFile.get();
+			vehicles.emplace(v);				
+		}
+
+		stations.emplace(id, new Station(id,name,vehicles)); //place in unordered map
+	}
+	inFile.close();
 	return true;
 	
-
 }
 
+//pre: stations with Id's that the trains specify already exist
 bool TrainController::readInTrains( string fileName )
 {
 	string vType;
@@ -45,17 +100,21 @@ bool TrainController::readInTrains( string fileName )
 		}
 
 		//TODO: find pointers to stations from their id's above.
-		trains.emplace(id,new Train(id,vehicles,depTime,arrTime,NULL,NULL));
+		Station *arrStation = stations.find(arrId)->second;
+		Station *depStation = stations.find(depId)->second;
+
+		trains.emplace(id,new Train(id,vehicles,depTime,arrTime,arrStation,depStation));
 	}
+	inFile.close();
 	return true;
 
 }
 
-bool TrainController::readInData( string fileName )
+bool TrainController::readInData( string stationFile, string trainFile )
 {
-	if (readInStations(fileName))
+	if (readInStations(stationFile))
 	{
-		return readInTrains(fileName);
+		return readInTrains(trainFile);
 	}
 	return false;
 }

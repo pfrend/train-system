@@ -11,6 +11,6 @@ private:
 public:
 	OpenFreightCarriage(int id, double loadCapacity, int loadSurface);
 	~OpenFreightCarriage(void);
-	void display(ostream&);
+	virtual void display(ostream&);
 };
 

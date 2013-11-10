@@ -3,7 +3,8 @@
 
 OpenFreightCarriage::OpenFreightCarriage(int id, double loadCapacity, int loadSurface)
 	:FreightCarriage(id,"OpenFreightCarriage"),
-	loadCapacity(loadCapacity), loadSurface(loadSurface)
+	loadCapacity(loadCapacity),
+	loadSurface(loadSurface)
 {
 }
 

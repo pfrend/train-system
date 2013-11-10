@@ -10,6 +10,6 @@ private:
 public:
 	ClosedFreightCarriage(int id, int loadingVolume);
 	~ClosedFreightCarriage(void);
-	void display(ostream&);
+	virtual void display(ostream&);
 };
 

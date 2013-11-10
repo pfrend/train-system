@@ -12,3 +12,4 @@ const int SCHEDULE_BUILD = 30; //note: subtracted from depTime as build happens 
 const int SCHEDULE_READY = 30;
 const int SCHEDULE_LEAVE = 10;
 const int SCHEDULE_STRIP_TRAIN = 30;
+const int SIM_TIME = 300;

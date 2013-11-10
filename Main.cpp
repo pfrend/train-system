@@ -33,6 +33,7 @@ int main() {
 
 	char ch; //menu selection
 	bool rerun = true, simHasEvents = true;
+	int cTime;
 
 	do
 	{
@@ -65,6 +66,10 @@ int main() {
 			
 			cout << "Moving forward " << TIMESTEP << " minutes..." << endl << endl;
 			simHasEvents = theSim->advance(TIMESTEP);
+
+			cTime = theSim->getTime();
+			if(cTime >= SIM_TIME)
+				theSim->scheduleEvent(new EndEvent(theSim,tCtrl,cTime));
 
 			
 			waitForKey();

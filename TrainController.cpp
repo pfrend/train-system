@@ -244,12 +244,12 @@ void TrainController::stripTrain( int trainId )
 	tmpTrain->setState(FINISHED);
 
 	cout << "time " << theSim->getTime() << ": Train " << trainId << " finished at station " << tmpTrain->getArrStation();
-	cout << endl << "It unloaded " << loadSize << " vehicles."
+	cout << endl << "It unloaded " << loadSize << " vehicles.";
 }
 
 void TrainController::closeTracks()
 {
-	cout << "time " << theSim->getTime() << ": END. Train tracks are now closed. No more trains may leave.";
+	cout << "time " << theSim->getTime() << ": END. Train tracks are now closed. No trains are active.";
 }
 
 

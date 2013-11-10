@@ -39,6 +39,8 @@ public:
 	void printSummary();
 	int dispatchTrain( int trainId ); //returns arrival time
 	void arriveTrain( int trainId );
+	void stripTrain( int trainId );
+	void closeTracks();
 };
 void waitForKey();
 

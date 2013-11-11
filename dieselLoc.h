@@ -1,6 +1,12 @@
+/*
+  File:         dieselLoc.h
+  Objective:    Header for DieselLoc class.
+  Date:         2013 / Paul Frend
+*/
+
 #pragma once
 #include "locomotive.h"
-class DieselLoc :
+class DieselLoc : //diesel locomotive
 	public Locomotive
 {
 

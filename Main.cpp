@@ -1,3 +1,9 @@
+/*
+  File:         Main.cpp
+  Objective:    Main file. Cnstructs and initiates a train simulation.
+  Edited:       2013 / Paul Frend
+*/
+
 #include "Simulation.h"
 #include "TrainController.h"
 
@@ -9,10 +15,6 @@ void testMoveVehicleToTrainFromStation();
 
 
 int main() {
-//testVehicleArray();
-//testCreateTrain();
-//testAddVehicleToStation();
-//testMoveVehicleToTrainFromStation();
 
 	Simulation *theSim = new Simulation;
 	TrainController *tCtrl = new TrainController(theSim); //pass in sim.
@@ -29,7 +31,6 @@ int main() {
 	tCtrl->scheduleEvents();
 
 	//print menu which lets user advance time
-
 
 	char ch; //menu selection
 	bool rerun = true, simHasEvents = true;

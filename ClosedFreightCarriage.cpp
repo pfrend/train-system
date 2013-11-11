@@ -1,3 +1,9 @@
+/*
+  File:         ClosedFreightCarriage.cpp
+  Objective:    Implementation of ClosedFreightCarriage class
+  Edited:       2013 / Paul Frend
+*/
+
 #include "ClosedFreightCarriage.h"
 
 

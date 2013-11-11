@@ -1,3 +1,8 @@
+/*
+  File:         SleepingCarriage.cpp
+  Objective:    Implementations
+  Edited:       2013 / Paul Frend
+*/
 #include "SleepingCarriage.h"
 
 

@@ -1,3 +1,9 @@
+/*
+  File:         CoachCarriage.h
+  Objective:    Header for CoachCarriage class
+  Date:         2013 / Paul Frend
+*/
+
 #pragma once
 #include "peoplecarriage.h"
 class CoachCarriage :

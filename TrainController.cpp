@@ -1,11 +1,32 @@
+/*
+  File:         TrainController.h
+  Objective:    Implementations
+  Edited:       2013 / Paul Frend
+*/
 #include "TrainController.h"
 
 
+//************************************
+// Method:    TrainController
+// FullName:  TrainController::TrainController
+// Access:    public 
+// Returns:   
+// Qualifier: : theSim(theSim), delayedTrips(0), successTrips(0), totalLateMins(0)
+// Parameter: Simulation * theSim
+//************************************
 TrainController::TrainController( Simulation* theSim ) 
 	: theSim(theSim), delayedTrips(0), successTrips(0), totalLateMins(0)
 {}
 
 
+//************************************
+// Method:    ~TrainController
+// FullName:  TrainController::~TrainController
+// Access:    public 
+// Returns:   
+// Qualifier:
+// Parameter: void
+//************************************
 TrainController::~TrainController(void)
 {
 	for (pair<int,Train*> train : trains) {
@@ -20,6 +41,14 @@ TrainController::~TrainController(void)
 	
 }
 
+//************************************
+// Method:    readInStations
+// FullName:  TrainController::readInStations
+// Access:    private 
+// Returns:   bool
+// Qualifier:
+// Parameter: string fileName
+//************************************
 bool TrainController::readInStations( string fileName )
 {
 	string name;
@@ -66,7 +95,7 @@ bool TrainController::readInStations( string fileName )
 				v = new OpenFreightCarriage(vId, loadCap, loadSur);
 			} else if (vType == "elecLoc") {
 				inFile >> maxSp >> power;
-				v = new elecLoc(vId,maxSp,power);
+				v = new ElecLoc(vId,maxSp,power);
 			} else if (vType == "dieselLoc") {
 				inFile >> maxSp >> fuelCon;
 				v = new DieselLoc(vId,maxSp, fuelCon);
@@ -83,6 +112,14 @@ bool TrainController::readInStations( string fileName )
 }
 
 //pre: stations with Id's that the trains specify already exist
+//************************************
+// Method:    readInTrains
+// FullName:  TrainController::readInTrains
+// Access:    private 
+// Returns:   bool
+// Qualifier:
+// Parameter: string fileName
+//************************************
 bool TrainController::readInTrains( string fileName )
 {
 	string vType;
@@ -121,6 +158,15 @@ bool TrainController::readInTrains( string fileName )
 
 }
 
+//************************************
+// Method:    readInData
+// FullName:  TrainController::readInData
+// Access:    public 
+// Returns:   bool
+// Qualifier:
+// Parameter: string stationFile
+// Parameter: string trainFile
+//************************************
 bool TrainController::readInData( string stationFile, string trainFile )
 {
 	if (readInStations(stationFile))
@@ -130,6 +176,13 @@ bool TrainController::readInData( string stationFile, string trainFile )
 	return false;
 }
 
+//************************************
+// Method:    scheduleEvents
+// FullName:  TrainController::scheduleEvents
+// Access:    public 
+// Returns:   void
+// Qualifier:
+//************************************
 void TrainController::scheduleEvents()
 {
 	//schedule build events for every train in system
@@ -139,6 +192,14 @@ void TrainController::scheduleEvents()
 	}
 }
 
+//************************************
+// Method:    tryBuild
+// FullName:  TrainController::tryBuild
+// Access:    public 
+// Returns:   bool
+// Qualifier:
+// Parameter: int trainId
+//************************************
 bool TrainController::tryBuild(int trainId)
 {
 	//find train
@@ -169,6 +230,14 @@ bool TrainController::tryBuild(int trainId)
 }
 
 
+//************************************
+// Method:    readyTrain
+// FullName:  TrainController::readyTrain
+// Access:    public 
+// Returns:   void
+// Qualifier:
+// Parameter: int trainId
+//************************************
 void TrainController::readyTrain(int trainId)
 {
 	//find train
@@ -180,6 +249,14 @@ void TrainController::readyTrain(int trainId)
 	cout << endl << "time " << theSim->getTime() << ": Train " << trainId << " has been assembled at station " << tmpTrain->getDepStation(); 
 }
 
+//************************************
+// Method:    dispatchTrain
+// FullName:  TrainController::dispatchTrain
+// Access:    public 
+// Returns:   int
+// Qualifier:
+// Parameter: int trainId
+//************************************
 int TrainController::dispatchTrain( int trainId )
 {
 	int lateness;
@@ -212,6 +289,14 @@ int TrainController::dispatchTrain( int trainId )
 	return arrTime;
 }
 
+//************************************
+// Method:    arriveTrain
+// FullName:  TrainController::arriveTrain
+// Access:    public 
+// Returns:   void
+// Qualifier:
+// Parameter: int trainId
+//************************************
 void TrainController::arriveTrain( int trainId )
 {
 	//find train
@@ -233,6 +318,13 @@ void TrainController::arriveTrain( int trainId )
 	}
 }
 
+//************************************
+// Method:    printSummary
+// FullName:  TrainController::printSummary
+// Access:    public 
+// Returns:   void
+// Qualifier:
+//************************************
 void TrainController::printSummary()
 {
 	cout << "end of sim. Details:" << endl << endl
@@ -242,6 +334,14 @@ void TrainController::printSummary()
 		<< countNotAssembled() << " trains never left" << endl << endl;
 }
 
+//************************************
+// Method:    stripTrain
+// FullName:  TrainController::stripTrain
+// Access:    public 
+// Returns:   void
+// Qualifier:
+// Parameter: int trainId
+//************************************
 void TrainController::stripTrain( int trainId )
 {
 	//find train
@@ -258,11 +358,25 @@ void TrainController::stripTrain( int trainId )
 	cout << endl << "It unloaded " << loadSize << " vehicles." << endl;
 }
 
+//************************************
+// Method:    closeTracks
+// FullName:  TrainController::closeTracks
+// Access:    public 
+// Returns:   void
+// Qualifier:
+//************************************
 void TrainController::closeTracks()
 {
 	cout << "time " << theSim->getTime() << ": END. Train tracks are now closed. No trains are active.";
 }
 
+//************************************
+// Method:    countNotAssembled
+// FullName:  TrainController::countNotAssembled
+// Access:    public 
+// Returns:   int
+// Qualifier:
+//************************************
 int TrainController::countNotAssembled()
 {
 	int count = 0;
@@ -272,6 +386,14 @@ int TrainController::countNotAssembled()
 	return count;
 }
 
+//************************************
+// Method:    printTrain
+// FullName:  TrainController::printTrain
+// Access:    public 
+// Returns:   void
+// Qualifier:
+// Parameter: int trainId
+//************************************
 void TrainController::printTrain( int trainId )
 {
 	Train* t = getTrain(trainId);
@@ -282,6 +404,14 @@ void TrainController::printTrain( int trainId )
 	}
 }
 
+//************************************
+// Method:    getTrain
+// FullName:  TrainController::getTrain
+// Access:    private 
+// Returns:   Train*
+// Qualifier:
+// Parameter: int id
+//************************************
 Train* TrainController::getTrain( int id )
 {
 	map<int,Train*>::iterator it;
@@ -293,6 +423,14 @@ Train* TrainController::getTrain( int id )
 	;
 }
 
+//************************************
+// Method:    printStation
+// FullName:  TrainController::printStation
+// Access:    public 
+// Returns:   void
+// Qualifier:
+// Parameter: int stationId
+//************************************
 void TrainController::printStation( int stationId )
 {
 	Station* s = getStation(stationId);
@@ -304,6 +442,14 @@ void TrainController::printStation( int stationId )
 	}
 }
 
+//************************************
+// Method:    getStation
+// FullName:  TrainController::getStation
+// Access:    private 
+// Returns:   Station*
+// Qualifier:
+// Parameter: int stationId
+//************************************
 Station* TrainController::getStation( int stationId )
 {
 	unordered_map<int,Station*>::iterator it;
@@ -315,6 +461,13 @@ Station* TrainController::getStation( int stationId )
 	;
 }
 
+//************************************
+// Method:    display
+// FullName:  TrainController::display
+// Access:    public 
+// Returns:   void
+// Qualifier:
+//************************************
 void TrainController::display()
 {
 	cout << "Trains: " << endl;

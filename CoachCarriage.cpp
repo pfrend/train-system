@@ -1,3 +1,8 @@
+/*
+  File:         CoachCarriage.cpp
+  Objective:    Implementation for CoachCarriage class
+  Edited:       2013 / Paul Frend
+*/
 #include "CoachCarriage.h"
 
 

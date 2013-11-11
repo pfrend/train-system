@@ -1,3 +1,9 @@
+/*
+  File:         Event.h
+  Objective:    Header for Event class
+  Date:         2013 / Paul Frend
+*/
+
 #pragma once
 
 // Forward declarations

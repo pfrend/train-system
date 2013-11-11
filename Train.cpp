@@ -1,6 +1,24 @@
+/*
+  File:         Train.cpp
+  Objective:    Implementations
+  Edited:       2013 / Paul Frend
+*/
 #include "Train.h"
 
 
+//************************************
+// Method:    Train
+// FullName:  Train::Train
+// Access:    public 
+// Returns:   
+// Qualifier: :id(id), vehicles(vehicles), /*null pointers but to derived classes of vehicles. */ schedDepTime(schedDepTime), schedArrTime(schedArrTime), depTime(schedDepTime), arrTime(schedArrTime), depStation(depStation), arrStation(arrStation), late(false), state(NOT_ASSEMBLED)
+// Parameter: int id
+// Parameter: trainMap vehicles
+// Parameter: int schedDepTime
+// Parameter: int schedArrTime
+// Parameter: Station * depStation
+// Parameter: Station * arrStation
+//************************************
 Train::Train(int id, trainMap vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation)
 	:id(id),
 	vehicles(vehicles), //null pointers but to derived classes of vehicles.
@@ -25,10 +43,14 @@ Train::~Train(void)
 }
 
 
-//add vehicles. 
-//pre: state == READY
-//return true if all vehicles added
-//return false if not all vehicles were added
+
+//************************************
+// Method:    addVehicles
+// FullName:  Train::addVehicles
+// Access:    public 
+// Returns:   bool true if all vehicles added. false if not all were added
+// Qualifier:
+//************************************
 bool Train::addVehicles() {
 	bool success = true;
 	for (pair<const trainSlot,Vehicle*> &v : vehicles)
@@ -36,6 +58,7 @@ bool Train::addVehicles() {
 		
 		//only search for vehicles that are null
 		if (!v.second) {
+
 		Vehicle *found = depStation->findVehicle(v.first.second);
 		if (found) //if find by type
 		{
@@ -44,17 +67,23 @@ bool Train::addVehicles() {
 			
 			//add to train
 			v.second = found;
-			success = true;
+			//success = true;
 
 		} else {
 			success = false;
 		}
-		
 		}
 	}
 	return success;
 }
 
+//************************************
+// Method:    unloadVehicles
+// FullName:  Train::unloadVehicles
+// Access:    public 
+// Returns:   bool
+// Qualifier:
+//************************************
 bool Train::unloadVehicles() {
 	bool success;
 	for (pair<const trainSlot,Vehicle*> &v : vehicles)
@@ -77,6 +106,13 @@ bool Train::unloadVehicles() {
 	return success;
 }
 
+//************************************
+// Method:    display
+// FullName:  Train::display
+// Access:    public 
+// Returns:   void
+// Qualifier:
+//************************************
 void Train::display() {
 	
 	cout << endl << endl
@@ -99,6 +135,14 @@ void Train::display() {
 	}
 }
 
+//************************************
+// Method:    convertState
+// FullName:  Train::convertState
+// Access:    public 
+// Returns:   std::string
+// Qualifier:
+// Parameter: trainStateT state
+//************************************
 std::string Train::convertState( trainStateT state )
 {
 	switch(state)

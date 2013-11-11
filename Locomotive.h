@@ -1,3 +1,9 @@
+/*
+  File:         Locomotive.h
+  Objective:    Header for Locomotive class
+  Date:         2013 / Paul Frend
+*/
+
 #pragma once
 #include "vehicle.h"
 class Locomotive :

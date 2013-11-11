@@ -1,10 +1,33 @@
+/*
+  File:         Station.cpp
+  Objective:    Implementations
+  Edited:       2013 / Paul Frend
+*/
 #include "Station.h"
 
+//************************************
+// Method:    Station
+// FullName:  Station::Station
+// Access:    public 
+// Returns:   
+// Qualifier: :id(id),name(name),vehicles(vehicles)
+// Parameter: int id
+// Parameter: string name
+// Parameter: vehicleSet vehicles
+//************************************
 Station::Station( int id, string name, vehicleSet vehicles )
 	:id(id),name(name),vehicles(vehicles)
 {}
 
 
+//************************************
+// Method:    ~Station
+// FullName:  Station::~Station
+// Access:    public 
+// Returns:   
+// Qualifier:
+// Parameter: void
+//************************************
 Station::~Station(void)
 {
 	for (Vehicle* v : vehicles) {
@@ -15,6 +38,14 @@ Station::~Station(void)
 
 
 //find vehicle
+//************************************
+// Method:    findVehicle
+// FullName:  Station::findVehicle
+// Access:    public 
+// Returns:   Vehicle*
+// Qualifier:
+// Parameter: string type
+//************************************
 Vehicle* Station::findVehicle(string type) {
 	
 	//NOTE: find_if is linear time. Would be better to use the find method of set as its O(1)
@@ -26,6 +57,14 @@ Vehicle* Station::findVehicle(string type) {
 
 }
 
+//************************************
+// Method:    removeVehicle
+// FullName:  Station::removeVehicle
+// Access:    public 
+// Returns:   bool
+// Qualifier:
+// Parameter: Vehicle * vehicle
+//************************************
 bool Station::removeVehicle(Vehicle* vehicle){
 	
 	int success;
@@ -37,6 +76,13 @@ bool Station::removeVehicle(Vehicle* vehicle){
 	return success == 1;
 }
 
+//************************************
+// Method:    display
+// FullName:  Station::display
+// Access:    public 
+// Returns:   void
+// Qualifier:
+//************************************
 void Station::display()
 {
 	cout << endl << endl

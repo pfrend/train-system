@@ -1,7 +1,7 @@
 /*
   File:         Event.cpp
   Objective:    Implementations
-  Date:         2007 / Örjan Sterner
+  Date:         2013 Paul Frend
 */
 
 #include "Event.h"

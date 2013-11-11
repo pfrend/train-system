@@ -1,3 +1,9 @@
+/*
+  File:         ClosedFreightCarriage.h
+  Objective:    Header for ClosedFreightCarriage class
+  Date:         2013 / Paul Frend
+*/
+
 #pragma once
 #include "freightcarriage.h"
 class ClosedFreightCarriage :

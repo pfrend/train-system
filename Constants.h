@@ -1,3 +1,9 @@
+/*
+  File:         Constants.h
+  Objective:    Header for application constants
+  Date:         2013 / Paul Frend
+*/
+
 //Train states
 const enum trainStateT {NOT_ASSEMBLED,
 	NOT_READY,
@@ -12,4 +18,4 @@ const int SCHEDULE_BUILD = 30; //note: subtracted from depTime as build happens 
 const int SCHEDULE_READY = 20;
 const int SCHEDULE_LEAVE = 10;
 const int SCHEDULE_STRIP_TRAIN = 30;
-const int SIM_TIME = 240;
+const int SIM_TIME = 300;

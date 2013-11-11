@@ -1,3 +1,8 @@
+/*
+  File:         dieselLoc.cpp
+  Objective:    Implementation for dieselLoc class
+  Edited:       2013 / Paul Frend
+*/
 #include "dieselLoc.h"
 
 

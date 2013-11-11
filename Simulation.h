@@ -1,8 +1,7 @@
 /*
   File:         Simulation.h
-  Objective:    Definition of class Simulation, a framework for
-                discrete event-driven simulation
-  Date:         2007 / Örjan Sterner
+  Objective:    Header for Simulation class. Takes events in priority queue.
+  Date:         2013 / Paul Frend
 */
 
 #pragma once

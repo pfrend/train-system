@@ -1,3 +1,8 @@
+/*
+  File:         Train.h
+  Objective:    Header for Train class. Represents train objects in system.
+  Date:         2013 / Paul Frend
+*/
 #pragma once
 using namespace std;
 #include <map>
@@ -10,7 +15,7 @@ using namespace std;
 typedef pair<int,string> trainSlot; 
 
 
-//train compare binary function
+//train compare binary function. order by order in train
 class trainCompare {
 public:
 	bool operator() (trainSlot a, trainSlot b) const{
@@ -27,24 +32,18 @@ private:
 	int id;
 	typedef trainMap::iterator it; //store pair in map so that we get access to type, order and vehicle in one 'row'
 	trainMap vehicles; //pointers to vehicles.
-	trainStateT state;
+	trainStateT state; // enum of train states. see consts.h
 	int depTime,schedDepTime; //dep time = when train actually left. schedDepTime = when it was meant to leave.
 	int arrTime, schedArrTime; //as above but for arrivals.
 	bool late;
 	Station* depStation;
 	Station* arrStation;
 	
-  
-	bool active; //needed? to find connected trains just loop through and filter by state? Or have a pointer collection in TrainController which points to active trains and one which points to all trains.
-	
-	it checkId(int vehicleId); //find component with ID
-
-
 public:
 	Train(int id, trainMap vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation);
 	~Train(void);
-	bool addVehicles(); //tries to add vehicles from depStation
-	bool unloadVehicles();
+	bool addVehicles(); //tries to add vehicles from depStation. TRUE if all added. FALSE if any failed.
+	bool unloadVehicles(); //moves vehicles to arrStation
 
 	int getSchedDepTime(){return schedDepTime;}
 	trainStateT getState(){return state;}
@@ -63,8 +62,7 @@ public:
 	void delay(int time){arrTime+=time;depTime+=time;}
 
 	void display(); //print out train details
-	string convertState( trainStateT state );
-	//TODO print out individual carriage details and more display methods
-	//Vehicle* getLocomotive();
+	string convertState( trainStateT state ); //convert enum to string
+
 };
 

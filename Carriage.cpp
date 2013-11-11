@@ -1,3 +1,9 @@
+/*
+  File:         Carriage.cpp
+  Objective:    Implementation for Carriage class
+  Edited:       2013 / Paul Frend
+*/
+
 #include "Carriage.h"
 
 

@@ -1,19 +1,25 @@
+/*
+  File:         elecLoc.cpp
+  Objective:    Implementation for elecLoc class
+  Edited:       2013 / Paul Frend
+*/
+
 #include "elecLoc.h"
 
 
-elecLoc::elecLoc(int id, int maxSpeedKm, int powerKw)
-	:Locomotive(id, "ElecLoc"),
+ElecLoc::ElecLoc(int id, int maxSpeedKm, int powerKw)
+	:Locomotive(id, "elecLoc"),
 	maxSpeedKm(maxSpeedKm),
 	powerKw(powerKw)
 {
 }
 
 
-elecLoc::~elecLoc(void)
+ElecLoc::~ElecLoc(void)
 {
 }
 
-void elecLoc::display(ostream& os) {
+void ElecLoc::display(ostream& os) {
 	Vehicle::display(os);
 	os << "max speed (km): " << maxSpeedKm << endl
 		<< "Power (kW): " << powerKw << endl;

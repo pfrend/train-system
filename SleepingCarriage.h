@@ -1,3 +1,8 @@
+/*
+  File:         SleepingCarriage.h
+  Objective:    Header for SleepingCarriage class
+  Date:         2013 / Paul Frend
+*/
 #pragma once
 #include "PeopleCarriage.h"
 class SleepingCarriage :

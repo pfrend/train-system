@@ -1,7 +1,12 @@
+/*
+  File:         Vehicle.h
+  Objective:    Header for vehicle class. Trains consist of vehicles.
+  Date:         2013 / Paul Frend
+*/
+#pragma once
 #include <iostream>
 #include <string>
 
-#pragma once
 
 using namespace std;
 class Vehicle
@@ -15,6 +20,6 @@ public:
 	Vehicle(int id, string type);
 	~Vehicle(void);
 	virtual void display(ostream& = cout) = 0;
-	string getType(){return type;}
+	string getType(){return type;} 
 };
 

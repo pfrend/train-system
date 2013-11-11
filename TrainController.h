@@ -1,3 +1,8 @@
+/*
+  File:         TrainController.h
+  Objective:    Header for TrainController class. Main class which operates on trains and stations and prints to user. Reacts to events.
+  Date:         2013 / Paul Frend
+*/
 #pragma once
 #include <vector>
 #include <set>

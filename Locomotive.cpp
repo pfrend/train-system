@@ -1,3 +1,8 @@
+/*
+  File:         Locomotive.cpp
+  Objective:    Implementations
+  Edited:       2013 / Paul Frend
+*/
 #include "Locomotive.h"
 
 

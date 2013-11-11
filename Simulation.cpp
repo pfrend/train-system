@@ -9,6 +9,16 @@
 #include "Constants.h"
 #include "Event.h"
 
+
+Simulation::~Simulation() {
+	while( ! eventQueue.empty()) {
+		Event * delEvent = eventQueue.top();
+		 eventQueue.pop();
+		 delete delEvent;
+		 delEvent = NULL;
+	}
+}
+
 // Execute events until event queue is empty
 bool Simulation::advance(int time)
 
@@ -30,6 +40,9 @@ bool Simulation::advance(int time)
 		nextEvent = NULL;
 
     }
+
+	if(currentTime >= SIM_TIME)
+		return false;
 
 	return true;
 

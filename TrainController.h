@@ -30,6 +30,7 @@ private:
 	bool readInStations(string fileName);
 	bool readInTrains(string fileName);
 	Train* getTrain(int id);
+	Station* getStation( int stationId );
 public:
 	TrainController( Simulation *theSim);
 	~TrainController( void );
@@ -46,9 +47,10 @@ public:
 	
 	void printSummary();
 	void printTrain(int trainId);
-	void printStation(int trainId);
+	void printStation(int stationId);
 
 	int countNotAssembled();
+
 };
 void waitForKey();
 

@@ -8,6 +8,16 @@ TrainController::TrainController( Simulation* theSim )
 
 TrainController::~TrainController(void)
 {
+	for (pair<int,Train*> train : trains) {
+		delete train.second;
+		train.second = NULL;
+	}
+
+	for (pair<int,Station*> station : stations) {
+		delete station.second;
+		station.second = NULL;
+	}
+	
 }
 
 bool TrainController::readInStations( string fileName )
@@ -29,9 +39,9 @@ bool TrainController::readInStations( string fileName )
 	//remove any existing stations
 	//deleteTrains(); TODO
 	
-	vehicleSet vehicles; //unordered multiset
 
 	while (inFile) {
+		vehicleSet vehicles; //unordered multiset
 
 		inFile >> id >> name >> vAmt; //get station id, name and amount of vehicles.
 		inFile.get();
@@ -87,7 +97,7 @@ bool TrainController::readInTrains( string fileName )
 
 	while (inFile) {
 
-		map<trainSlot, Vehicle*> vehicles; //trainSlot holds vehicle order in train and type
+		trainMap vehicles; //trainSlot holds vehicle order in train and type
 
 		inFile >> id >> depId >> arrId >> depTime >> arrTime >> vAmt;
 		inFile.get();
@@ -104,7 +114,7 @@ bool TrainController::readInTrains( string fileName )
 		Station *arrStation = stations.find(arrId)->second;
 		Station *depStation = stations.find(depId)->second;
 
-		trains.emplace(id,new Train(id,vehicles,depTime,arrTime,arrStation,depStation));
+		trains.emplace(id,new Train(id,vehicles,depTime,arrTime,depStation,arrStation));
 	}
 	inFile.close();
 	return true;
@@ -143,7 +153,8 @@ bool TrainController::tryBuild(int trainId)
 		
 		return true;
 	}
-	cout << "time " << theSim->getTime() << ": Train " << trainId << "could not build at station " << tmpTrain->getDepStation(); 
+	cout << endl << endl << "time " << theSim->getTime() << ": Train " << trainId << " could not build at station " << tmpTrain->getDepStation();
+	cout << endl << "Trying again in " << TRAIN_DELAY << " minutes";
 
 
 	//set train to late
@@ -163,7 +174,7 @@ void TrainController::readyTrain(int trainId)
 	//set state
 	tmpTrain->setState(READY);
 	
-	cout << "time " << theSim->getTime() << ": Train " << trainId << " has been assembled at station " << tmpTrain->getDepStation(); 
+	cout << endl << "time " << theSim->getTime() << ": Train " << trainId << " has been assembled at station " << tmpTrain->getDepStation(); 
 }
 
 int TrainController::dispatchTrain( int trainId )
@@ -194,7 +205,7 @@ int TrainController::dispatchTrain( int trainId )
 
 	int arrTime = tmpTrain->getArrTime();
 
-	cout << "time " << theSim->getTime() << ": Train " << trainId << " just left station " << tmpTrain->getDepStation();
+	cout << endl << "time " << theSim->getTime() << ": Train " << trainId << " just left station " << tmpTrain->getDepStation();
 	if (tmpTrain->getLate())
 		cout << endl << "It left " << lateness << " minutes late";
 	else
@@ -211,7 +222,7 @@ void TrainController::arriveTrain( int trainId )
 	Train* tmpTrain = trains.find(trainId)->second;
 	tmpTrain->setState(ARRIVED);
 
-	cout << "time " << theSim->getTime() << ": Train " << trainId << " just arrived at station " << tmpTrain->getArrStation();
+	cout << endl << "time " << theSim->getTime() << ": Train " << trainId << " just arrived at station " << tmpTrain->getArrStation();
 
 	//if train arrived late
 	if (tmpTrain->getLate()) {
@@ -280,10 +291,23 @@ Train* TrainController::getTrain( int id )
 	return trains.find(id)->second;
 }
 
-void TrainController::printStation( int trainId )
+void TrainController::printStation( int stationId )
 {
+	Station* s = getStation(stationId);
 
+	if (s) {
+		s->display();
+	} else {
+		cout << "station not found!";
+	}
 }
+
+Station* TrainController::getStation( int stationId )
+{
+   return stations.find(stationId)->second;
+}
+
+
 
 
 //HELPERS

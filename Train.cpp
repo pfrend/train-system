@@ -1,7 +1,7 @@
 #include "Train.h"
 
 
-Train::Train(int id, map<trainSlot,Vehicle*> vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation)
+Train::Train(int id, trainMap vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation)
 	:id(id),
 	vehicles(vehicles), //null pointers but to derived classes of vehicles.
 	schedDepTime(schedDepTime),
@@ -17,6 +17,11 @@ Train::Train(int id, map<trainSlot,Vehicle*> vehicles, int schedDepTime, int sch
 
 Train::~Train(void)
 {
+	for (pair<const trainSlot,Vehicle*> &v : vehicles)
+	{
+		delete v.second;
+		v.second = NULL;
+	}
 }
 
 
@@ -29,6 +34,8 @@ bool Train::addVehicles() {
 	for (pair<const trainSlot,Vehicle*> &v : vehicles)
 	{
 		
+		//only search for vehicles that are null
+		if (!v.second) {
 		Vehicle *found = depStation->findVehicle(v.first.second);
 		if (found) //if find by type
 		{
@@ -43,7 +50,7 @@ bool Train::addVehicles() {
 			success = false;
 		}
 		
-		
+		}
 	}
 	return success;
 }
@@ -56,6 +63,7 @@ bool Train::unloadVehicles() {
 		if (v.second) //if vehicle exists
 		{
 			//add to station
+
 			arrStation->addVehicle(v.second);
 			
 			//remove from train
@@ -76,10 +84,12 @@ void Train::display() {
 		<< "state: " << convertState(state) << endl
 		<< "vehicles in train: " << endl << endl;
 
+
 	//print all vehicles
 	for (pair<const trainSlot,Vehicle*> &v : vehicles) {
 		if(v.second)
 			v.second->display();
+cout << endl;
 	}
 }
 
@@ -91,7 +101,6 @@ std::string Train::convertState( trainStateT state )
 		return "NOT_ASSEMBLED";
 	case 1:
 		return "NOT_READY";
-
 	case 2:
 		return "READY";
 	case 3:
@@ -100,6 +109,8 @@ std::string Train::convertState( trainStateT state )
 		return "ARRIVED";
 	case 5:
 		return "FINISHED";
+	default:
+		return "error";
 	}
 }
 

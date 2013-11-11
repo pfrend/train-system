@@ -7,7 +7,10 @@ Station::Station( int id, string name, vehicleSet vehicles )
 
 Station::~Station(void)
 {
-	//TODO destroy all vehicles in vehicleSet
+	for (Vehicle* v : vehicles) {
+		delete v;
+		v = NULL;
+	}
 }
 
 
@@ -32,4 +35,19 @@ bool Station::removeVehicle(Vehicle* vehicle){
 	
 	//return true if 1 elem was erased.
 	return success == 1;
+}
+
+void Station::display()
+{
+	cout << endl << endl
+		<< "Station id: " << id << endl
+		<< "station name: " << name << endl
+		<< "vehicles at station: " << endl << endl;
+
+	//print all vehicles
+	for (Vehicle* v : vehicles) {
+		if(v)
+			v->display();
+		cout << endl;
+	}
 }

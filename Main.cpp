@@ -34,7 +34,7 @@ int main() {
 	char ch; //menu selection
 	bool rerun = true, simHasEvents = true;
 	//int cTime;
-	int select, trainId;
+	int select, trainId,stationId;
 
 	do
 	{
@@ -86,7 +86,17 @@ int main() {
 			waitForKey();
 			break;
 
-		case '7':
+		case '3':
+			cout << endl << endl
+				<< "Which station would you like details on?";
+			cin >> stationId;
+			cin.get();
+
+			tCtrl->printStation(stationId);
+
+			waitForKey();
+			break;
+		case '4':
 		case 'q':
 		case 'Q':
 		case char(27):
@@ -98,6 +108,10 @@ int main() {
 	}while(rerun);	
 
 system("pause");
+
+delete theSim;
+delete tCtrl;
+
 return 0;
 }
 

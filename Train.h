@@ -5,19 +5,26 @@ using namespace std;
 #include "Constants.h"
 #include "Station.h"
 
-//forward declare station
-class Station;
-
 //trainSlot stored as key in trainMap, which stores all vehicles.
 //int: vehicle order in train. string: vehicle type.
 typedef pair<int,string> trainSlot; 
+
+
+//train compare binary function
+class trainCompare {
+public:
+	bool operator() (trainSlot a, trainSlot b) const{
+		return a.first < b.first;
+	}
+};
+
+typedef map<trainSlot, Vehicle*, trainCompare> trainMap;
 
 class Train
 {
 
 private:
 	int id;
-	typedef map<trainSlot, Vehicle*> trainMap;
 	typedef trainMap::iterator it; //store pair in map so that we get access to type, order and vehicle in one 'row'
 	trainMap vehicles; //pointers to vehicles.
 	trainStateT state;
@@ -34,7 +41,7 @@ private:
 
 
 public:
-	Train(int id, map<trainSlot,Vehicle*> vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation);
+	Train(int id, trainMap vehicles, int schedDepTime, int schedArrTime, Station* depStation, Station* arrStation);
 	~Train(void);
 	bool addVehicles(); //tries to add vehicles from depStation
 	bool unloadVehicles();

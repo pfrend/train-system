@@ -17,6 +17,7 @@ using std::vector;
 class Simulation {
 public:
     Simulation () : eventQueue(), currentTime(0) { }
+	~Simulation();
 
     // Add a new event to event queue.
     void scheduleEvent (Event * newEvent);

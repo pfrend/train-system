@@ -2,7 +2,7 @@
 1
 2
 40
-80
+50
 5
 dieselLoc
 SleepingCarriage
@@ -10,12 +10,13 @@ CoachCarriage
 ClosedFreightCarriage
 OpenFreightCarriage
 2
-1
 2
-60
+1
 90
-4
+130
+5
 dieselLoc
 SleepingCarriage
 CoachCarriage
+ClosedFreightCarriage
 ClosedFreightCarriage

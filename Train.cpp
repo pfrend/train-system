@@ -82,14 +82,20 @@ void Train::display() {
 	cout << endl << endl
 		<< "Train id: " << id << endl
 		<< "state: " << convertState(state) << endl
-		<< "vehicles in train: " << endl << endl;
-
+		<< "Departure: at " << depTime << " from station " << depStation->getId() << endl
+		<< "Arrival: at " << arrTime << " at station " << arrStation->getId() << endl;
+	if(late) cout << "Running late by " << depTime - schedDepTime << " minutes" << endl;
+	
+	cout << "vehicles in train: " << endl << endl;
 
 	//print all vehicles
 	for (pair<const trainSlot,Vehicle*> &v : vehicles) {
+
 		if(v.second)
 			v.second->display();
-cout << endl;
+		else
+			cout << "Not yet added: " << v.first.second;
+		cout << endl;
 	}
 }
 

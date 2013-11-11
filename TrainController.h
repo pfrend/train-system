@@ -50,7 +50,7 @@ public:
 	void printStation(int stationId);
 
 	int countNotAssembled();
-
+	void display();
 };
 void waitForKey();
 

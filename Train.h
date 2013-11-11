@@ -50,6 +50,7 @@ public:
 	trainStateT getState(){return state;}
 	int getSchedArrTime(){return schedArrTime;}
 	int getDepTime(){return depTime;}
+	int getId(){return id;}
 	int getArrTime(){return arrTime;}
 	int getDepStation(){return depStation->getId();}
 	int getArrStation(){return arrStation->getId();}
@@ -59,7 +60,7 @@ public:
 	void setLate(bool nLate){late = nLate;}
 	void setDepTime(int time){depTime = time;}
 	void setState( trainStateT nState ){state = nState;}
-	void arrDelay(int time){arrTime+=time;}
+	void delay(int time){arrTime+=time;depTime+=time;}
 
 	void display(); //print out train details
 	string convertState( trainStateT state );

@@ -34,7 +34,7 @@ int main() {
 	char ch; //menu selection
 	bool rerun = true, simHasEvents = true;
 	//int cTime;
-	int select, trainId,stationId;
+	int select, trainId,objId;
 
 	do
 	{
@@ -45,7 +45,8 @@ int main() {
 			<< " 1. Advance time" << endl
 			<< " 2. Get train info" << endl
 			<< " 3. Get station info" << endl
-			<< " 4. Quit" << endl << endl
+			<< " 4. Train system info" << endl
+			<< " 5. Quit" << endl << endl
 			<< "Please make your selection:";
 
 		cin >>ch; // user makes their choice
@@ -65,13 +66,9 @@ int main() {
 				break;
 			}
 			
-			cout << "Moving forward " << TIMESTEP << " minutes..." << endl << endl;
+			cout << "time " << theSim->getTime() + TIMESTEP << ": Moved forward " << TIMESTEP << " minutes..." << endl << endl;
 			simHasEvents = theSim->advance(TIMESTEP);
 
-		/*	cTime = theSim->getTime();
-			if(cTime >= SIM_TIME)
-				theSim->scheduleEvent(new EndEvent(theSim,tCtrl,cTime));*/
-			
 			waitForKey();
 			break;
 
@@ -89,14 +86,20 @@ int main() {
 		case '3':
 			cout << endl << endl
 				<< "Which station would you like details on?";
-			cin >> stationId;
+			cin >> objId;
 			cin.get();
 
-			tCtrl->printStation(stationId);
+			tCtrl->printStation(objId);
 
 			waitForKey();
 			break;
 		case '4':
+			cout << endl << endl;
+			tCtrl->display();
+			waitForKey();
+			break;
+	
+		case '5':
 		case 'q':
 		case 'Q':
 		case char(27):
@@ -121,20 +124,20 @@ return 0;
 //*******************************
 void testVehicleArray(){
 
-map<trainSlot, Vehicle*> testVehicles;
-map<trainSlot, Vehicle*>::iterator it;
-
-//add a logical vehicle, i.e. pointer 
-Vehicle* v;
-trainSlot v1(1,"DieselLoc");
-trainSlot v2(2,"SleepingCarriage");
-
-
-testVehicles.emplace(v1, v);
-testVehicles.emplace(v2, v);
-
-it = testVehicles.find(v2);
-cout << it->first.second;
+//map<trainSlot, Vehicle*> testVehicles;
+//map<trainSlot, Vehicle*>::iterator it;
+//
+////add a logical vehicle, i.e. pointer 
+//Vehicle* v;
+//trainSlot v1(1,"DieselLoc");
+//trainSlot v2(2,"SleepingCarriage");
+//
+//
+//testVehicles.emplace(v1, v);
+//testVehicles.emplace(v2, v);
+//
+//it = testVehicles.find(v2);
+//cout << it->first.second;
 
 }
 

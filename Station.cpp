@@ -42,7 +42,8 @@ void Station::display()
 	cout << endl << endl
 		<< "Station id: " << id << endl
 		<< "station name: " << name << endl
-		<< "vehicles at station: " << endl << endl;
+		<< "total vehicles: " << vehicles.size() << endl
+		<< "vehicle details: " << endl << endl;
 
 	//print all vehicles
 	for (Vehicle* v : vehicles) {

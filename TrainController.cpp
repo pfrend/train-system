@@ -146,16 +146,19 @@ bool TrainController::tryBuild(int trainId)
 	
 	if (tmpTrain && tmpTrain->addVehicles())
 	{
-		cout << "time " << theSim->getTime() << ": Train " << trainId << " finished building at station " << tmpTrain->getDepStation(); 
+		cout << "time " << theSim->getTime() << ": Train " << trainId << " started building at station " << tmpTrain->getDepStation(); 
 
 		//set state
 		tmpTrain->setState(NOT_READY);
 		
 		return true;
 	}
-	cout << endl << endl << "time " << theSim->getTime() << ": Train " << trainId << " could not build at station " << tmpTrain->getDepStation();
+	cout << endl << endl << "time " << theSim->getTime() << ": Train " << trainId << " could not finish build at station " << tmpTrain->getDepStation();
 	cout << endl << "Trying again in " << TRAIN_DELAY << " minutes";
-
+		
+		//delay train
+		tmpTrain->delay(TRAIN_DELAY);
+	
 
 	//set train to late
 	if ( ! tmpTrain->getLate()){
@@ -192,15 +195,8 @@ int TrainController::dispatchTrain( int trainId )
 
 	//if train is leaving late
 	if(tmpTrain->getLate()) {
-	
-		//set current departure time
-		tmpTrain->setDepTime(cTime);
-		
 		//how late is it
 		lateness = cTime - tmpTrain->getSchedDepTime();
-
-		//delay arrival time
-		tmpTrain->arrDelay(lateness);
 	}
 
 	int arrTime = tmpTrain->getArrTime();
@@ -259,7 +255,7 @@ void TrainController::stripTrain( int trainId )
 	tmpTrain->setState(FINISHED);
 
 	cout << "time " << theSim->getTime() << ": Train " << trainId << " finished at station " << tmpTrain->getArrStation();
-	cout << endl << "It unloaded " << loadSize << " vehicles.";
+	cout << endl << "It unloaded " << loadSize << " vehicles." << endl;
 }
 
 void TrainController::closeTracks()
@@ -288,7 +284,13 @@ void TrainController::printTrain( int trainId )
 
 Train* TrainController::getTrain( int id )
 {
-	return trains.find(id)->second;
+	map<int,Train*>::iterator it;
+	it = trains.find(id);
+	if(it!=trains.end())
+		return it->second;
+	else
+		return NULL;
+	;
 }
 
 void TrainController::printStation( int stationId )
@@ -304,7 +306,26 @@ void TrainController::printStation( int stationId )
 
 Station* TrainController::getStation( int stationId )
 {
-   return stations.find(stationId)->second;
+	unordered_map<int,Station*>::iterator it;
+	it = stations.find(stationId);
+	if(it!=stations.end())
+		return it->second;
+	else
+		return NULL;
+	;
+}
+
+void TrainController::display()
+{
+	cout << "Trains: " << endl;
+	for (pair<int,Train*> train : trains) {
+		cout << "Id: " << train.second->getId() << endl;
+	}
+	cout << endl
+		<< "Stations: " << endl;
+	for (pair<int,Station*> station : stations) {
+		cout << "Id: " << station.second->getId() << " Name: " << station.second->getName() << endl;
+	}
 }
 
 
